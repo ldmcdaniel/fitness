@@ -6,8 +6,10 @@
         <option v-for="(option, key) in options" :value="key">{{option.name}}</option>
       </select>
     </form>
-    <div v-show="currentView === 'amrap'">
-      <p>amrap</p>
+    <div v-show="currentView === 'bigThree'">
+      <p>{{getRandom(exercises.legs)}}</p>
+      <p>{{getRandom(exercises.push)}}</p>
+      <p>{{getRandom(exercises.pull)}}</p>
     </div>
     <div v-show="currentView === '5x5'">
       <p>5x5</p>
@@ -25,8 +27,8 @@ export default {
   data() {
     return {
       options: {
-        amrap: {
-          name: 'As Many Rounds as Possible',
+        bigThree: {
+          name: 'Push, Pull, and Legs',
         },
         '5x5': {
           name: 'Five rounds of five',
@@ -37,41 +39,108 @@ export default {
       },
       exercises: {
         legs: {
-          barbellSquat: 'Barbell Squat',
-          airSquat: 'Air Squat',
-          deadlift: 'Barbell Deadlift',
-          lunge: 'Barbell Lunge',
+          barbellSquat: {
+            name: 'Barbell Squat',
+            start: 0,
+            current: 0,
+          },
+          airSquat: {
+            name: 'Air Squat',
+            start: 0,
+            current: 0,
+          },
+          deadlift: {
+            name: 'Barbell Deadlift',
+            start: 0,
+            current: 0,
+          },
+          lunge: {
+            name: 'Barbell Lunge',
+            start: 0,
+            current: 0,
+          },
         },
         push: {
-          pushup: 'Pushup',
-          dip: 'Dip',
-          military: 'Overhead Press',
-          bench: 'Bench Press',
-          incline: 'Incline Bench Press',
+          pushup: {
+            name: 'Pushup',
+            start: 0,
+            current: 0,
+          },
+          dip: {
+            name: 'Dip',
+            start: 0,
+            current: 0,
+          },
+          military: {
+            name: 'Overhead Press',
+            start: 0,
+            current: 0,
+          },
+          bench: {
+            name: 'Bench Press',
+            start: 0,
+            current: 0,
+          },
+          incline: {
+            name: 'Incline Bench Press',
+            start: 0,
+            current: 0,
+          },
         },
         pull: {
-          pullup: 'Pullup',
-          row: 'Bent Over Row',
-          upright: 'Upright Barbell Row',
+          pullup: {
+            name: 'Pullup',
+            start: 0,
+            current: 0,
+          },
+          row: {
+            name: 'Bent Over Row',
+            start: 0,
+            current: 0,
+          },
+          upright: {
+            name: 'Upright Barbell Row',
+            start: 0,
+            current: 0,
+          },
         },
         abs: {
-          toesToBar: 'Toes to Bar',
-          knessToChest: 'Knees to Chest',
-          situp: 'Situp',
+          toesToBar: {
+            name: 'Toes to Bar',
+            start: 0,
+            current: 0,
+          },
+          knessToChest: {
+            name: 'Knees to Chest',
+            start: 0,
+            current: 0,
+          },
+          situp: {
+            name: 'Situp',
+            start: 0,
+            current: 0,
+          },
         },
         shoulders: {
-          sideRaise: 'Side Raise',
+          sideRaise: {
+            name: 'Side Raise',
+            start: 0,
+            current: 0,
+          },
         },
       },
-      currentView: 'amrap',
-      selected: '',
+      currentView: 'bigThree',
     };
   },
 
   name: 'app',
 
   methods: {
-
+    getRandom(exercises) {
+      const random = Math.floor(Math.random() * (Object.keys(exercises).length));
+      const exercise = Object.values(exercises)[random];
+      return `${exercise.name}: Use ${exercise.start} lbs.`;
+    },
   },
 
   computed: {
