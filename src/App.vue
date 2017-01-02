@@ -7,15 +7,36 @@
       </select>
     </form>
     <div v-show="currentView === 'bigThree'">
-      <p>{{getRandom(exercises.legs)}}</p>
-      <p>{{getRandom(exercises.push)}}</p>
-      <p>{{getRandom(exercises.pull)}}</p>
+      <h3>Warmup</h3>
+      <p>Olympic warmup</p>
+      <h3>Workout</h3>
+      <p>{{getRandom(pull)}}</p>
+      <p>{{getRandom(push)}}</p>
+      <p>{{getRandom(legs)}}</p>
+      <p>----- ----- -----</p>
+      <p>{{getRandom(pull)}}</p>
+      <p>{{getRandom(push)}}</p>
+      <p>{{getRandom(legs)}}</p>
     </div>
     <div v-show="currentView === '5x5'">
-      <p>5x5</p>
+      <h3>Warmup</h3>
+      <p>Olympic warmup</p>
+      <h3>Workout</h3>
+      <p>{{Object.keys(legs)[0]}} at {{Object.values(legs)[0]}}lbs.</p>
+      <p>{{Object.keys(push)[3]}} at {{Object.values(push)[3]}}lbs.</p>
+      <p>{{Object.keys(pull)[1]}} at {{Object.values(pull)[1]}}lbs.</p>
+      <p>{{Object.keys(push)[2]}} at {{Object.values(push)[2]}}lbs.</p>
+      <p>{{Object.keys(legs)[2]}} at {{Object.values(legs)[2]}}lbs.</p>
+
     </div>
     <div v-show="currentView === 'test'">
-      <p>Judgement</p>
+      <h3>Warmup</h3>
+      <p>Olympic warmup</p>
+      <h3>Workout</h3>
+      <p>{{Object.keys(legs)[0]}} at {{Object.values(legs)[0]}}lbs.</p>
+      <p>{{Object.keys(push)[3]}} at {{Object.values(push)[3]}}lbs.</p>
+      <p>{{Object.keys(pull)[1]}} at {{Object.values(pull)[1]}}lbs.</p>
+      <p></p>
     </div>
   </div>
 </template>
@@ -37,97 +58,30 @@ export default {
           name: 'Judgement time',
         },
       },
-      exercises: {
-        legs: {
-          barbellSquat: {
-            name: 'Barbell Squat',
-            start: 0,
-            current: 0,
-          },
-          airSquat: {
-            name: 'Air Squat',
-            start: 0,
-            current: 0,
-          },
-          deadlift: {
-            name: 'Barbell Deadlift',
-            start: 0,
-            current: 0,
-          },
-          lunge: {
-            name: 'Barbell Lunge',
-            start: 0,
-            current: 0,
-          },
-        },
-        push: {
-          pushup: {
-            name: 'Pushup',
-            start: 0,
-            current: 0,
-          },
-          dip: {
-            name: 'Dip',
-            start: 0,
-            current: 0,
-          },
-          military: {
-            name: 'Overhead Press',
-            start: 0,
-            current: 0,
-          },
-          bench: {
-            name: 'Bench Press',
-            start: 0,
-            current: 0,
-          },
-          incline: {
-            name: 'Incline Bench Press',
-            start: 0,
-            current: 0,
-          },
-        },
-        pull: {
-          pullup: {
-            name: 'Pullup',
-            start: 0,
-            current: 0,
-          },
-          row: {
-            name: 'Bent Over Row',
-            start: 0,
-            current: 0,
-          },
-          upright: {
-            name: 'Upright Barbell Row',
-            start: 0,
-            current: 0,
-          },
-        },
-        abs: {
-          toesToBar: {
-            name: 'Toes to Bar',
-            start: 0,
-            current: 0,
-          },
-          knessToChest: {
-            name: 'Knees to Chest',
-            start: 0,
-            current: 0,
-          },
-          situp: {
-            name: 'Situp',
-            start: 0,
-            current: 0,
-          },
-        },
-        shoulders: {
-          sideRaise: {
-            name: 'Side Raise',
-            start: 0,
-            current: 0,
-          },
-        },
+      legs: {
+        'Barbell Squat': 45,
+        'Barbell Deadlift': 45,
+        'Barbell Lunge': 45,
+      },
+      push: {
+        Pushup: 0,
+        Dip: 0,
+        'Overhead Press': 45,
+        'Bench Press': 45,
+        'Incline Bench Press': 45,
+      },
+      pull: {
+        Pullup: 0,
+        'Bent Over Row': 45,
+        'Upright Barbell Row': 45,
+      },
+      abs: {
+        'Toes to Bar': 0,
+        'Knees to Chest': 0,
+        Situp: 0,
+      },
+      shoulders: {
+        'Side Raise': 0,
       },
       currentView: 'bigThree',
     };
@@ -138,8 +92,14 @@ export default {
   methods: {
     getRandom(exercises) {
       const random = Math.floor(Math.random() * (Object.keys(exercises).length));
-      const exercise = Object.values(exercises)[random];
-      return `${exercise.name}: Use ${exercise.start} lbs.`;
+      const exercise = Object.keys(exercises)[random];
+      const weight = Object.values(exercises)[random];
+
+      return `${exercise}: Use ${weight} lbs.`;
+    },
+
+    getExercise(name) {
+      return name;
     },
   },
 
