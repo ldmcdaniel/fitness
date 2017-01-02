@@ -10,10 +10,12 @@
       <h3>Warmup</h3>
       <p>Olympic warmup</p>
       <h3>Workout</h3>
+      <h5>Part A</h5>
       <p>{{getRandom(pull)}}</p>
       <p>{{getRandom(push)}}</p>
       <p>{{getRandom(legs)}}</p>
       <p>----- ----- -----</p>
+      <h5>Part B</h5>
       <p>{{getRandom(pull)}}</p>
       <p>{{getRandom(push)}}</p>
       <p>{{getRandom(legs)}}</p>
@@ -26,7 +28,7 @@
       <p>{{Object.keys(push)[3]}} at {{Object.values(push)[3]}}lbs.</p>
       <p>{{Object.keys(pull)[1]}} at {{Object.values(pull)[1]}}lbs.</p>
       <p>{{Object.keys(push)[2]}} at {{Object.values(push)[2]}}lbs.</p>
-      <p>{{Object.keys(legs)[2]}} at {{Object.values(legs)[2]}}lbs.</p>
+      <p>{{Object.keys(legs)[1]}} at {{Object.values(legs)[1]}}lbs.</p>
 
     </div>
     <div v-show="currentView === 'test'">
@@ -62,6 +64,8 @@ export default {
         'Barbell Squat': 45,
         'Barbell Deadlift': 45,
         'Barbell Lunge': 45,
+        'Barbell Good Morning': 45,
+        'Barbell Stright-leg Deadlift': 45,
       },
       push: {
         Pushup: 0,
@@ -69,19 +73,24 @@ export default {
         'Overhead Press': 45,
         'Bench Press': 45,
         'Incline Bench Press': 45,
+        'Barbell Push Press': 45,
       },
       pull: {
         Pullup: 0,
-        'Bent Over Row': 45,
+        'Barbell Row': 45,
         'Upright Barbell Row': 45,
       },
       abs: {
         'Toes to Bar': 0,
         'Knees to Chest': 0,
         Situp: 0,
+        'Barbell Rollout': 45,
       },
       shoulders: {
         'Side Raise': 0,
+      },
+      biceps: {
+        'Barbell Curl': 45,
       },
       currentView: 'bigThree',
     };
