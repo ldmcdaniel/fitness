@@ -2,70 +2,52 @@
   <div id="app">
     <h1>Fitness-factory</h1>
     <form>
-      <select v-model="currentView">
-        <option v-for="(option, key) in options" :value="key">{{option.name}}</option>
+      <select v-model="selected.pull">
+        <option v-for="(key, value) in pull" :value="value">{{value}}</option>
+      </select>
+      <select v-model="selected.push">
+        <option v-for="(key, value) in push" :value="value">{{value}}</option>
+      </select>
+      <select v-model="selected.legs">
+        <option v-for="(key, value) in legs" :value="value">{{value}}</option>
       </select>
     </form>
-    <div v-show="currentView === 'bigThree'">
       <h3>Warmup</h3>
       <p>Olympic warmup</p>
       <h3>Workout</h3>
-      <h5>Part A</h5>
-      <p>{{getRandom(pull)}}</p>
-      <p>{{getRandom(push)}}</p>
-      <p>{{getRandom(legs)}}</p>
+      <h5>{{options.amrap}}</h5>
+      <p>{{selected.pull}} at {{pull[selected.pull]}}lbs.</p>
+      <p>{{selected.push}} at {{pull[selected.push]}}lbs.</p>
+      <p>{{selected.legs}} at {{pull[selected.legs]}}lbs.</p>
       <p>----- ----- -----</p>
-      <h5>Part B</h5>
-      <p>{{getRandom(pull)}}</p>
-      <p>{{getRandom(push)}}</p>
-      <p>{{getRandom(legs)}}</p>
-    </div>
-    <div v-show="currentView === '5x5'">
-      <h3>Warmup</h3>
-      <p>Olympic warmup</p>
-      <h3>Workout</h3>
-      <p>{{Object.keys(legs)[0]}} at {{Object.values(legs)[0]}}lbs.</p>
-      <p>{{Object.keys(push)[3]}} at {{Object.values(push)[3]}}lbs.</p>
-      <p>{{Object.keys(pull)[1]}} at {{Object.values(pull)[1]}}lbs.</p>
-      <p>{{Object.keys(push)[2]}} at {{Object.values(push)[2]}}lbs.</p>
-      <p>{{Object.keys(legs)[1]}} at {{Object.values(legs)[1]}}lbs.</p>
-
-    </div>
-    <div v-show="currentView === 'test'">
-      <h3>Warmup</h3>
-      <p>Olympic warmup</p>
-      <h3>Workout</h3>
-      <p>{{Object.keys(legs)[0]}} at {{Object.values(legs)[0]}}lbs.</p>
-      <p>{{Object.keys(push)[3]}} at {{Object.values(push)[3]}}lbs.</p>
-      <p>{{Object.keys(pull)[1]}} at {{Object.values(pull)[1]}}lbs.</p>
-      <p></p>
-    </div>
+      <h5>{{options.fiveSets}}</h5>
+      <p>{{selected.pull}} at {{pull[selected.pull]}}lbs.</p>
+      <p>{{selected.push}} at {{pull[selected.push]}}lbs.</p>
+      <p>{{selected.legs}} at {{pull[selected.legs]}}lbs.</p>
+      <p>----- ----- -----</p>
+      <h5>{{options.judgement}}</h5>
+      <p>{{selected.pull}} at {{pull[selected.pull]}}lbs.</p>
+      <p>{{selected.push}} at {{pull[selected.push]}}lbs.</p>
+      <p>{{selected.legs}} at {{pull[selected.legs]}}lbs.</p>
   </div>
 </template>
 
 <script>
-// import Hello from './components/Hello';
 
 export default {
   data() {
     return {
       options: {
-        bigThree: {
-          name: 'Push, Pull, and Legs',
-        },
-        '5x5': {
-          name: 'Five rounds of five',
-        },
-        test: {
-          name: 'Judgement time',
-        },
+        amrap: '20 Minutes AMRAP',
+        fiveSets: 'Five rounds',
+        judgement: 'Judgement time',
       },
       legs: {
-        'Barbell Squat': 45,
-        'Barbell Deadlift': 45,
-        'Barbell Lunge': 45,
-        'Barbell Good Morning': 45,
-        'Barbell Stright-leg Deadlift': 45,
+        Squat: 45,
+        Deadlift: 45,
+        Lunge: 45,
+        'Good Morning': 45,
+        'Stright-leg Deadlift': 45,
       },
       push: {
         Pushup: 0,
@@ -77,22 +59,26 @@ export default {
       },
       pull: {
         Pullup: 0,
-        'Barbell Row': 45,
-        'Upright Barbell Row': 45,
+        Row: 45,
+        'Upright Row': 45,
       },
       abs: {
         'Toes to Bar': 0,
         'Knees to Chest': 0,
         Situp: 0,
-        'Barbell Rollout': 45,
+        Rollout: 45,
       },
       shoulders: {
         'Side Raise': 0,
       },
       biceps: {
-        'Barbell Curl': 45,
+        Curl: 45,
       },
-      currentView: 'bigThree',
+      selected: {
+        pull: 'Pullup',
+        push: 'Bench Press',
+        legs: 'Deadlift',
+      },
     };
   },
 
@@ -106,16 +92,9 @@ export default {
 
       return `${exercise}: Use ${weight} lbs.`;
     },
-
-    getExercise(name) {
-      return name;
-    },
   },
 
   computed: {
-    // setCurrentView() {
-    //   this.currentView = ;
-    // },
   },
 
   components: {
