@@ -32,11 +32,11 @@
           <div class="form-group">
             <div class="row">
               <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                <h5>for week</h5>
+                <h5>week</h5>
               </div>
               <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
                 <select v-model="week" class="form-control">
-                  <option v-for="(value, key) in weeks" :value="key">{{key}}</option>
+                  <option v-for="(value, key) in weeks" :value="key">{{value}}</option>
                 </select>
               </div>
             </div>
