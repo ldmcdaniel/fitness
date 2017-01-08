@@ -1,34 +1,52 @@
 <template>
-  <div id="app">
-    <h1>Fitness-factory</h1>
-    <form>
-      <select v-model="selected.pull">
-        <option v-for="(key, value) in pull" :value="value">{{value}}</option>
-      </select>
-      <select v-model="selected.push">
-        <option v-for="(key, value) in push" :value="value">{{value}}</option>
-      </select>
-      <select v-model="selected.legs">
-        <option v-for="(key, value) in legs" :value="value">{{value}}</option>
-      </select>
-    </form>
+  <div id="app" class="container">
+    <div class="row">
+      <h1>Fitness-factory</h1>
+    </div>
+    <div class="row">
+      <div class="col-lg-offset-5 col-md-offset-5 col-sm-offset-4 col-xs-offset-3 col-lg-2 col-md-2 col-sm-4 col-xs-6">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <select v-model="selected.pull" class="form-control">
+              <option v-for="(key, value) in pull" :value="value">{{value}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select v-model="selected.push" class="form-control">
+              <option v-for="(key, value) in push" :value="value">{{value}}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select v-model="selected.legs" class="form-control">
+              <option v-for="(key, value) in legs" :value="value">{{value}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+    </div>
       <h3>Warmup</h3>
       <p>Olympic warmup</p>
       <h3>Workout</h3>
-      <h5>{{options.amrap}}</h5>
-      <p>{{selected.pull}} at {{pull[selected.pull]}}lbs.</p>
-      <p>{{selected.push}} at {{pull[selected.push]}}lbs.</p>
-      <p>{{selected.legs}} at {{pull[selected.legs]}}lbs.</p>
-      <p>----- ----- -----</p>
-      <h5>{{options.fiveSets}}</h5>
-      <p>{{selected.pull}} at {{pull[selected.pull]}}lbs.</p>
-      <p>{{selected.push}} at {{pull[selected.push]}}lbs.</p>
-      <p>{{selected.legs}} at {{pull[selected.legs]}}lbs.</p>
-      <p>----- ----- -----</p>
-      <h5>{{options.judgement}}</h5>
-      <p>{{selected.pull}} at {{pull[selected.pull]}}lbs.</p>
-      <p>{{selected.push}} at {{pull[selected.push]}}lbs.</p>
-      <p>{{selected.legs}} at {{pull[selected.legs]}}lbs.</p>
+      <div class="container">
+        <div class="col-xs-4">
+          <h5>{{options.amrap}}</h5>
+          <p>{{selected.pull}} at {{pull[selected.pull]}}lbs.</p>
+          <p>{{selected.push}} at {{push[selected.push]}}lbs.</p>
+          <p>{{selected.legs}} at {{legs[selected.legs]}}lbs.</p>
+        </div>
+        <div class="col-xs-4">
+          <h5>{{options.fiveSets}}</h5>
+          <p>{{selected.pull}} at {{pull[selected.pull]}}lbs.</p>
+          <p>{{selected.push}} at {{push[selected.push]}}lbs.</p>
+          <p>{{selected.legs}} at {{legs[selected.legs]}}lbs.</p>
+        </div>
+        <div class="col-xs-4">
+          <h5>{{options.judgement}}</h5>
+          <p>{{selected.pull}} at {{pull[selected.pull]}}lbs.</p>
+          <p>{{selected.push}} at {{push[selected.push]}}lbs.</p>
+          <p>{{selected.legs}} at {{legs[selected.legs]}}lbs.</p>
+        </div>
+      </div>
   </div>
 </template>
 
