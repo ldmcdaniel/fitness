@@ -4,43 +4,53 @@
       <h1>Fitness-factory</h1>
     </div>
     <div class="row">
-      <div class="col-lg-offset-5 col-md-offset-5 col-sm-offset-4 col-xs-offset-3 col-lg-2 col-md-2 col-sm-4 col-xs-6">
+      <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-xs-offset-3 col-lg-4 col-md-4 col-sm-4 col-xs-6">
         <form class="form-horizontal">
           <div v-show="customExercises">
             <div class="form-group">
-              <select v-model="selected.pull" class="form-control">
-                <option v-for="(key, value) in pull" :value="value">{{value}}</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <select v-model="selected.push" class="form-control">
-                <option v-for="(key, value) in push" :value="value">{{value}}</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <select v-model="selected.legs" class="form-control">
-                <option v-for="(key, value) in legs" :value="value">{{value}}</option>
-              </select>
+              <div class="row">
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><h5>Pull</h5></label>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                  <select v-model="selected.pull" class="form-control">
+                    <option v-for="(key, value) in pull" :value="value">{{value}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><h5>Push</h5></label>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                  <select v-model="selected.push" class="form-control">
+                    <option v-for="(key, value) in push" :value="value">{{value}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <label class="col-lg-2 col-md-2 col-sm-2 col-xs-2"><h5>Legs</h5></label>
+                <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                  <select v-model="selected.legs" class="form-control">
+                    <option v-for="(key, value) in legs" :value="value">{{value}}</option>
+                  </select>
+                </div>
+              </div>
             </div>
             <div class="form-group">
               <p>or</p>
             </div>
           </div>
           <div class="form-group">
-            <button @click.prevent="customExercises = !customExercises" class="btn btn-default">{{setButtonText()}}</button>
+            <button @click.prevent="customExercises = !customExercises" class="btn btn-info">{{setButtonText()}}</button>
           </div>
           <div class="form-group">
             <div class="row">
-              <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+              <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
                 <h5>week</h5>
               </div>
-              <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+              <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
                 <select v-model="week" class="form-control">
                   <option v-for="(value, key) in weeks" :value="key">{{value}}</option>
                 </select>
               </div>
             </div>
-
           </div>
         </form>
       </div>
@@ -49,24 +59,9 @@
     <p>Olympic warmup</p>
     <h3>Workout</h3>
     <div class="row" v-show="customExercises">
-      <div class="col-xs-4">
-        <h5>{{options.amrap}}</h5>
-        <p>{{selected.pull}} at {{pull[selected.pull]}}lbs. for {{reps[week].amrap.pull}} rep</p>
-        <p>{{selected.push}} at {{push[selected.push]}}lbs. for {{reps[week].amrap.push}} rep</p>
-        <p>{{selected.legs}} at {{legs[selected.legs]}}lbs. for {{reps[week].amrap.legs}} rep</p>
-      </div>
-      <div class="col-xs-4">
-        <h5>{{options.fiveSets}}</h5>
-        <p>{{selected.pull}} at {{pull[selected.pull]}}lbs. for {{reps[week].fiveSets.pull}} rep</p>
-        <p>{{selected.push}} at {{push[selected.push]}}lbs. for {{reps[week].fiveSets.push}} rep</p>
-        <p>{{selected.legs}} at {{legs[selected.legs]}}lbs. for {{reps[week].fiveSets.legs}} rep</p>
-      </div>
-      <div class="col-xs-4">
-        <h5>{{options.judgment}}</h5>
-        <p>{{selected.pull}} at {{pull[selected.pull]}}lbs. for {{reps[week].judgment.pull}} rep</p>
-        <p>{{selected.push}} at {{push[selected.push]}}lbs. for {{reps[week].judgment.push}} rep</p>
-        <p>{{selected.legs}} at {{legs[selected.legs]}}lbs. for {{reps[week].judgment.legs}} rep</p>
-      </div>
+      <workout :options="options.amrap" :selected="selected" :reps="reps" :pull="pull" :push="push" :legs="legs" :week="week"></workout>
+      <workout :options="options.fiveSets" :selected="selected" :reps="reps" :pull="pull" :push="push" :legs="legs" :week="week"></workout>
+      <workout :options="options.judgment" :selected="selected" :reps="reps" :pull="pull" :push="push" :legs="legs" :week="week"></workout>
     </div>
     <div class="row" v-show="!customExercises">
       <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -209,6 +204,7 @@
 </template>
 
 <script>
+import workout from './components/workout';
 
 export default {
   data() {
@@ -440,21 +436,13 @@ export default {
     },
   },
 
-  computed: {
-  },
-
-  components: {
-  },
+  components: { workout },
 };
 </script>
 
 <style>
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
