@@ -47,7 +47,6 @@ export default {
     return {
       legs: {
         Squat: 45,
-        Deadlift: 45,
         Lunge: 45,
         'Good Morning': 45,
         'Stright-leg Deadlift': 45,
@@ -63,12 +62,13 @@ export default {
       pull: {
         Pullup: 0,
         Row: 45,
-        'Upright Row': 45,
+        Deadlift: 45,
+        'Bent-over Row': 45,
       },
       selected: {
         pull: 'Pullup',
         push: 'Bench Press',
-        legs: 'Deadlift',
+        legs: 'Squat',
       },
       reps: {
         one: {
